@@ -3,7 +3,6 @@
 #include "Mcu_Hw.h"
 #include "std_types.h"
 #include "Utils.h"
-#include <stdio.h>
 
 int main(void)
 {

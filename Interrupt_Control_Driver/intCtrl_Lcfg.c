@@ -5,7 +5,7 @@
 const IntCtrl_InterruptCfgType IntCtrl_InterruptCfg[NUM_OF_ACTIVATED_INTERRUPTS]=
 {
 	/*InterruptNum                 Interrupt_Group       InterruptSubGroup*/
-	{PWM_1_FAULT,                   2,                    0},
+	{GPIO_PORT_A,                   2,                    0},
 	{UART_0,                        3,                    1}
 	
 };

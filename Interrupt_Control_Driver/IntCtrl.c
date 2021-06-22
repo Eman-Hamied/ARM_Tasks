@@ -47,13 +47,13 @@ void IntCrtl_Init(void)
 		u8 intNum;
 		u8 intGroup;
 		u8 intSubGroup;
-		u32 PRI_Num;
-		u32 PRI_Offset;
-		u8 locGroupingField;
+		u8 PRI_Num;
+		static volatile u8 PRI_Offset;
+		u32 locGroupingField;
 
 	/*TODO Configure Grouping\SubGrouping System in APINT register in SCB*/
 
-    APINT = (u32)0x05FA000 | (u32)(INTCTR_PRI_GROUPING_SELECTOR << 8); //Shifted by 8 so we can put the config in the 2nd byte 
+    APINT = (u32)0x05FA0000 | (u32)(INTCTR_PRI_GROUPING_SELECTOR << 8); //Shifted by 8 so we can put the config in the 2nd byte 
 
     for (i=0; i< NUM_OF_ACTIVATED_INTERRUPTS; i++){
 
@@ -77,12 +77,12 @@ void IntCrtl_Init(void)
     #endif
 
     // To get which PRI Register we will put the value in
-	    PRI_Num = intNum / 4;
+	    PRI_Num = (intNum / 4)*4;
 
     // % sign to know which fields we will configure, we multiplied by 8 to go to the right field, and we added 5 because all registers starts from 5
 			PRI_Offset = ((intNum % 4) *8 ) + 5;
-	    GET_HWREG (NVIC_PRI_BASE_ADDRESS, PRI_Offset) |= (locGroupingField << PRI_Offset);
-
+		
+		  GET_HWREG (NVIC_PRI_BASE_ADDRESS, PRI_Num) |= ((u32)locGroupingField << PRI_Offset);
 
 	/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
     
@@ -118,3 +118,4 @@ void IntCrtl_Init(void)
 /**********************************************************************************************************************
  *  END OF FILE: IntCrtl.c
  *********************************************************************************************************************/
+

@@ -9,6 +9,6 @@
 #define get_bit(reg,bitn) ((reg&(1<<bitn))>>bitn)
 #define toggle_bit(reg,bitn) reg^=(1<<bitn)
 #define set_byte(reg,value) reg = value
-#define GET_HWREG(BaseAddr,RegOffset)      *((volatile u32*)(BaseAddr+RegOffset))
+#define GET_HWREG(BaseAddr,RegOffset)      (*((volatile u32*)(BaseAddr+RegOffset)))
 
 #endif /* UTILS_H_ */

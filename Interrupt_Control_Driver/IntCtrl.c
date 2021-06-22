@@ -48,7 +48,7 @@ void IntCrtl_Init(void)
 		u8 intGroup;
 		u8 intSubGroup;
 		u8 PRI_Num;
-		static volatile u8 PRI_Offset;
+		u8 PRI_Offset;
 		u32 locGroupingField;
 
 	/*TODO Configure Grouping\SubGrouping System in APINT register in SCB*/
